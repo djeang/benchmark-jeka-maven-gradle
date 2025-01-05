@@ -2,3 +2,5 @@
 
 /jeka-output
 /.jeka-work
+/.gradle/
+/build/
