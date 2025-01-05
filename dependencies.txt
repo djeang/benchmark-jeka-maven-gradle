@@ -1,0 +1,10 @@
+==== COMPILE ====
+org.springframework.boot:spring-boot-dependencies::pom:3.4.1
+org.springframework.boot:spring-boot-starter-web
+org.springframework.boot:spring-boot-starter-graphql
+org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0
+
+==== RUNTIME ====
+
+==== TEST ====
+org.springframework.boot:spring-boot-starter-test
