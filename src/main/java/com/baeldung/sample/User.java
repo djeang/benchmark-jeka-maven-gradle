@@ -2,23 +2,25 @@ package com.baeldung.sample;
 
 public class User {
 
-    private String firstName;
+public int age = 23;
+
+    private String firstNamehhhhhhh;
     private String lastName;
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
+    public User(String firstNamehhhhhhh, String lastName) {
+        this.firstNamehhhhhhh = firstNamehhhhhhh;
         this.lastName = lastName;
     }
 
     public User() {
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstNamehhhhhhh() {
+        return firstNamehhhhhhh;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstNamehhhhhhh(String firstNamehhhhhhh) {
+        this.firstNamehhhhhhh = firstNamehhhhhhh;
     }
 
     public String getLastName() {
