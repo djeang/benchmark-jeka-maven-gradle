@@ -11,8 +11,8 @@
         <version>3.4.1</version>
     </parent>
 
-    <groupId>dev.jeka.examples</groupId>
-    <artifactId>spring-boot-3-native</artifactId>
+    <groupId>org.github.djeang</groupId>
+    <artifactId>benchmark-maven</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

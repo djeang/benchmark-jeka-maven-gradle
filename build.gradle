@@ -10,7 +10,6 @@ buildscript {
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.1'
-    //id 'org.graalvm.buildtools.native' version '0.10.3'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -18,7 +17,7 @@ if (!project.hasProperty('disableNative')) {
     apply plugin: 'org.graalvm.buildtools.native'
 }
 
-group = 'com.example'
+group = 'org.github.djeang'
 version = '0.0.1-SNAPSHOT'
 
 java {

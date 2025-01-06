@@ -57,3 +57,16 @@ SpringBoot: 3.4.1
 | Create native executable from compiled jars | 5m 39s | 4m 32s | 4m 41s | 4m 38s             |
 | Create Docker JVM-based image from scratch  | 14.49s | 5.73s  | 5.40s  | 27.22s             |
 | Create Docker native image from scratch     | 2m 53s | 2m 45s | 2m 53s | 3m 36s             |
+
+
+## Image Size
+
+
+|               | Size  | Base-Image                       |        | 
+|---------------|-------|----------------------------------|--------|
+| Maven JVM     | 268MB | paketobuildpacks/run-jammy-tiny  |        | 
+| Maven Native  | 148MB | paketobuildpacks/run-jammy-tiny  |        | 
+| JeKa JVM      | 245MB | eclipse-temurin:23-jre-alpine    |        | 
+| JeKa Native   | 133MB | paketobuildpacks/run-jammy-tiny  |        |
+| Gradle JVM    | 268MB | paketobuildpacks/run-jammy-tiny  |        | 
+| Gradle Native | 148MB | paketobuildpacks/run-jammy-tiny  |        | 
