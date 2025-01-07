@@ -42,7 +42,7 @@ SpringBoot: 3.4.1
 |---------------------------------------------|---------|--------|--------|--------------------|
 | Clean                                       | 0.85s   | 0.27s  | 0.36s  | 2.41s              |
 | Compile                                     | 1.43s   | 0.49s  | 0.87s  | 6.69s              |
-| Create Jar from scratch (including tests)   | 2.97s   | 1.93s  | 1.19s  | 7.20s              |
+| Create Jar from scratch (including tests)   | 2.97s   | 1.93s  | 2.39s  | 8.99s              |
 | Create native executable from compiled jars | 1m 12s  | 1m 10s | 1m 11s | 1m 17s             |
 | Create Docker JVM-based image from scratch  | 9.71s   | 2.23s  | 7.04s  | 13.60s             |
 | Create Docker native image from scratch     | 59.818s | 59.31s | 58.89s | 1m 06s             |
