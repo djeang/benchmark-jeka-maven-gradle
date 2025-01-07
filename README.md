@@ -4,6 +4,13 @@ Benchmark build speed on a diifreent scenario of a given Spring-Boot app.
 
 The application is a TODO list accessible via REST and GraphQL APIs.
 
+## Setup graalvm for Maven and Gradle
+
+```shell
+export GRAALVM_HOME=~/.jeka/cache/jdks/graalvm-23
+export PATH=$PATH:$GRAALVM_HOME/bin
+```
+
 ## Methodology
 
 The project is configured to build with both *Maven*, *Jeka* and *Gradle*.
@@ -61,7 +68,6 @@ SpringBoot: 3.4.1
 
 ## Image Size
 
-
 |               | Size  | Base-Image                       |        | 
 |---------------|-------|----------------------------------|--------|
 | Maven JVM     | 268MB | paketobuildpacks/run-jammy-tiny  |        | 
@@ -70,3 +76,15 @@ SpringBoot: 3.4.1
 | JeKa Native   | 133MB | paketobuildpacks/run-jammy-tiny  |        |
 | Gradle JVM    | 268MB | paketobuildpacks/run-jammy-tiny  |        | 
 | Gradle Native | 148MB | paketobuildpacks/run-jammy-tiny  |        | 
+
+
+## Zero Cache - Measures running on Apple M4 pro, RAM 48 GB:
+
+|                                             | Maven  | Jeka   | Gradle | Gradle (no daemon) |
+|---------------------------------------------|--------|--------|--------|--------------------|
+| Clean                                       | 7.86s  | 1.32s  | 25.68s | 22.74s             |
+| Compile                                     | 19.40s | 24.58s | 33.82s | 34.18s             |
+| Create Jar from scratch (including tests)   | 27.15s | 38.87s | fail   | 42.59s             |
+| Create native executable from compiled jars | 1m 38s | 1m 31s | fail   | 1m 53s             |
+| Create Docker JVM-based image from scratch  | 1m 27s | 31.40s | fail   | 2m 04s             |
+| Create Docker native image from scratch     | 2m 26s | 2m 28s | fail   | 2m 40s             |
