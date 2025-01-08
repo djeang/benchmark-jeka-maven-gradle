@@ -155,6 +155,7 @@ The table lists the produced image sizes. Note that Jeka optimizes Docker cachin
 
 ### Ease of Configuration
 
+Maven pom.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -261,4 +262,4 @@ JeKa excels in configuration simplicity. Not only is the configuration much more
 All three tools are suitable for creating Spring Boot Docker images. Choosing a build tool depends on personal preference: some developers stick with traditional, well-established tools, while others opt for simplicity, performance, or innovation.
 
 ## Resources:
-- Customize Docker Images with JeKa: https://jeka-dev.github.io/jeka/reference/kbeans/#docker
+- Customize Docker Images with JeKa: https://jeka-dev.github.io/jeka/reference/kbeans-docker/)
