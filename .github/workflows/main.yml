@@ -18,8 +18,15 @@ jobs:
           native-image --version
 
       - name: Maven clean package
-        run: ./mvnw clean package && ./mvnw -Pnative
+        run: ./mvnw clean package
       - name: Jeka pack
         run: ./jeka --clean pack
       - name: Gradle clean build
         run: ./gradlew clean build -PdisableNative
+
+      - name: Maven native exec
+        run: ./mvnw -Pnative native:compile
+      - name: Jeka native exec
+        run: "./jeka native: compile"
+      - name: Gradle native exec
+        run: ./gradlew nativeCompile
