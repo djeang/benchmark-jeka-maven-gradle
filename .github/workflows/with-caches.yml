@@ -1,0 +1,86 @@
+name: GraalVM build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'      # See 'Options' for more details
+          distribution: 'graalvm' # See 'Supported distributions' for available options
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show environment variables
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+          
+     
+
+      - name: Restore JeKa cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.jeka/cache
+          key: ${{ runner.os }}
+      - name: Restore Gradle cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.gradle/cache
+          key: ${{ runner.os }}
+      - name: Restore Maven cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.m2/cache
+          key: ${{ runner.os }}
+
+      - name: Prefetch dependencies
+        run: |
+          ./mvnw package
+          ./jeka pack
+          ./gradlew build -PdisableNative
+
+      - name: Maven build jar
+        run: ./mvnw clean package
+      - name: Jeka build jar
+        run: ./jeka pack --clean --duration
+      - name: Gradle build jar
+        run: ./gradlew clean build -PdisableNative
+
+      - name: Maven JVM Docker
+        run: ./mvnw clean spring-boot:build-image
+      - name: Jeka JVM Docker
+        run: "./jeka test docker: build --clean --duration"
+      - name: Gradle JVM Docker
+        run: ./gradlew clean bootBuildImage -PdisableNative
+
+      - name: Maven native Docker
+        run: ./mvnw clean -Pnative spring-boot:build-image
+      - name: Jeka native Docker
+        run: "./jeka test docker: buildNative --clean --duration"
+      - name: Gradle native Docker
+        run: ./gradlew clean clean bootBuildImage
+
+      - name: Maven native exec
+        run: ./mvnw -Pnative native:compile
+      - name: Jeka native exec
+        run: "./jeka native: compile --duration"
+      - name: Gradle native exec
+        run: ./gradlew nativeCompile
+
+      - name: Save JeKa cache
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.jeka/cache
+          key: ${{ runner.os }}
+      - name: Save Maven cache
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}
+      - name: Save Gradle cache
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.gradle/cache
+          key: ${{ runner.os }}
