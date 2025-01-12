@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '21'      # See 'Options' for more details
+          java-version: '23'      # See 'Options' for more details
           distribution: 'graalvm' # See 'Supported distributions' for available options
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Show environment variables
@@ -16,23 +16,14 @@ jobs:
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
-          
-     
 
-      - name: Restore JeKa cache
+      - name: Restore cache
         uses: actions/cache/restore@v4
         with:
-          path: ~/.jeka/cache
-          key: ${{ runner.os }}
-      - name: Restore Gradle cache
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.gradle/cache
-          key: ${{ runner.os }}
-      - name: Restore Maven cache
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.m2/cache
+          path: |
+            ~/.m2/cache
+            ~/.jeka/cache
+            ~/.gradle/cache
           key: ${{ runner.os }}
 
       - name: Prefetch dependencies
@@ -69,18 +60,11 @@ jobs:
       - name: Gradle native exec
         run: ./gradlew nativeCompile
 
-      - name: Save JeKa cache
+      - name: Save cache
         uses: actions/cache/save@v4
         with:
-          path: ~/.jeka/cache
-          key: ${{ runner.os }}
-      - name: Save Maven cache
-        uses: actions/cache/save@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}
-      - name: Save Gradle cache
-        uses: actions/cache/save@v4
-        with:
-          path: ~/.gradle/cache
+          path: |
+            ~/.m2/cache
+            ~/.jeka/cache
+            ~/.gradle/cache
           key: ${{ runner.os }}
