@@ -18,7 +18,7 @@ jobs:
           native-image --version
 
       - name: Maven clean package
-        run: ./mvnw clean package && ./mvnw -Pnatuve
+        run: ./mvnw clean package && ./mvnw -Pnative
       - name: Jeka pack
         run: ./jeka --clean pack
       - name: Gradle clean build
