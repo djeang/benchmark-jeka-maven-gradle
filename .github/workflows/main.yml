@@ -30,19 +30,19 @@ jobs:
       - name: Maven JVM Docker
         run: ./mvnw clean spring-boot:build-image
       - name: Jeka JVM Docker
-        run: "test docker: build --clean --duration"
+        run: "./jeka test docker: build --clean --duration"
       - name: Gradle JVM Docker
-        run: clean bootBuildImage -PdisableNative
+        run: ./gradlew clean bootBuildImage -PdisableNative
 
       - name: clean cache
         run: ./clean-caches
 
       - name: Maven native Docker
-        run: clean -Pnative spring-boot:build-image
+        run: ./mvnw clean -Pnative spring-boot:build-image
       - name: Jeka native Docker
-        run: "test docker: buildNative --clean --duration"
+        run: "./jeka test docker: buildNative --clean --duration"
       - name: Gradle native Docker
-        run: clean clean bootBuildImage
+        run: ./gradlew clean clean bootBuildImage
 
       - name: clean cache
         run: ./clean-caches
