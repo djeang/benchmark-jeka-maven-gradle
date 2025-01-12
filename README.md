@@ -65,9 +65,9 @@ The following commands are executed for each build tool:
 | Clean                                       | `clean`                                  | `--clean`                          | `clean`                                |
 | Compile                                     | `clean compile`                          | `--clean compile`                  | `clean compileJava`                    |
 | Create Jar from scratch (including tests)   | `clean package`                          | `--clean pack`                     | `clean build -PdisableNative`          |
-| Create native executable from compiled jars | `-Pnative native:compile`                | `native:compile`                   | `nativeCompile`                        |
-| Create Docker JVM-based image from scratch  | `clean spring-boot:build-image`          | `--clean test docker:build`        | `clean bootBuildImage -PdisableNative` |
-| Create Docker native image from scratch     | `clean -Pnative spring-boot:build-image` | `--clean test docker:buildNative`  | `clean bootBuildImage`                 |
+| Create native executable from compiled jars | `-Pnative native:compile`                | `native: compile`                  | `nativeCompile`                        |
+| Create Docker JVM-based image from scratch  | `clean spring-boot:build-image`          | `--clean test docker: build`       | `clean bootBuildImage -PdisableNative` |
+| Create Docker native image from scratch     | `clean -Pnative spring-boot:build-image` | `--clean test docker: buildNative` | `clean bootBuildImage`                 |
 
 ---
 
