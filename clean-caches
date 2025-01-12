@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Clean Maven
 rm -rf ~/.m2/repository
 rm -rf ~/.m2/wrapper
