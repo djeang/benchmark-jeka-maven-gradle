@@ -21,16 +21,16 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            ~/.m2/cache
+            ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
           key: ${{ runner.os }}
 
       - name: Prefetch dependencies
         run: |
-          ./mvnw package
-          ./jeka pack
-          ./gradlew build -PdisableNative
+          ./mvnw dependency:resolve
+          ./jeka depTree
+          ./gradlew --refresh-dependencies
 
       - name: Maven build jar
         run: ./mvnw clean package
@@ -64,7 +64,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            ~/.m2/cache
+            ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
           key: ${{ runner.os }}
