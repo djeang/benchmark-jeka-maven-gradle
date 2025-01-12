@@ -25,7 +25,7 @@ jobs:
         run: ./gradlew clean build -PdisableNative
 
       - name: clean cache
-        run : .clean-caches.sh
+        run : clean-caches.sh
 
       - name: Maven JVM Docker
         run: ./mvnw clean spring-boot:build-image
@@ -35,7 +35,7 @@ jobs:
         run: clean bootBuildImage -PdisableNative
 
       - name: clean cache
-        run: .clean-caches.sh
+        run: clean-caches.sh
 
       - name: Maven native Docker
         run: clean -Pnative spring-boot:build-image
@@ -45,7 +45,7 @@ jobs:
         run: clean clean bootBuildImage
 
       - name: clean cache
-        run: .clean-caches.sh
+        run: clean-caches.sh
 
       - name: Maven native exec
         run: ./mvnw -Pnative native:compile

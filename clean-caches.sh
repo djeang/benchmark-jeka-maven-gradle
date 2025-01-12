@@ -17,6 +17,7 @@ rm -rf ~/.gradle/wrapper/dists/gradle-8.12-bin
 rm -rf ~/.gradle/caches/8.12
 rm -rf ~/.gradle/caches/modules-2
 rm -rf ~/.gradle/caches/journal-1
+rm -rf ~/.gradle/daemon
 rm -rf .gradle
 
 # Clean Docker
