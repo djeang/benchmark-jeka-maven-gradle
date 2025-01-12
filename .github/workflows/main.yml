@@ -24,13 +24,6 @@ jobs:
       - name: Gradle build jar
         run: ./gradlew clean build -PdisableNative
 
-      - name: Maven native exec
-        run: ./mvnw -Pnative native:compile
-      - name: Jeka native exec
-        run: "./jeka native: compile --duration"
-      - name: Gradle native exec
-        run: ./gradlew nativeCompile
-
       - name: clean cache
         run : .clean-caches.sh
 
@@ -50,3 +43,13 @@ jobs:
         run: "test docker: buildNative --clean --duration"
       - name: Gradle native Docker
         run: clean clean bootBuildImage
+
+      - name: clean cache
+        run: .clean-caches.sh
+
+      - name: Maven native exec
+        run: ./mvnw -Pnative native:compile
+      - name: Jeka native exec
+        run: "./jeka native: compile --duration"
+      - name: Gradle native exec
+        run: ./gradlew nativeCompile
