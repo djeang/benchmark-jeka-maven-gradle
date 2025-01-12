@@ -24,7 +24,7 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
-          key: ${{ runner.os }}
+          key: ${{ runner.os }}-bench-1
 
       - name: Prefetch dependencies
         run: |
@@ -67,4 +67,4 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
-          key: ${{ runner.os }}
+          key: ${{ runner.os }}-bench-1
