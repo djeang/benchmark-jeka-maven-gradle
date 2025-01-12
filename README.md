@@ -1,15 +1,18 @@
-# Benchmark Jeka-Maven-Gradle for Building Spring Boot Images
+# Cloud-Native Spring Boot Build Benchmark: Maven vs JeKa vs Gradle
+
 ## Objective
-Compare the performance of *Maven*, *Gradle*, and *Jeka* in building a cloud-native Spring Boot application, including:
-- Creating Docker images.
-- Creating native images.
+
+Compare the performance of *Maven*, *JeKa*, and *Gradle* in building a Spring Boot cloud-native application, including creating both JVM and native Docker images.
 
 This comparison is performed in the following scenarios:
-- A powerful development workstation with all caches available.
-- A medium-performance Windows workstation with all caches available.
-- A CI/CD pipeline simulation with all caches disabled (no Docker cache, no wrapper tool cache, no Java dependencies cache).
+- **Development on workstations**: Tested on a high-performance MacBook and a medium-performance Windows machine (with all caches available).
+- **CI/CD pipeline simulation**: All caches disabled (no Docker cache, no wrapper tool cache, no Java dependencies cache).
 
-The goal is to evaluate the performance of the tools using their vanilla configurations without complex optimizations (e.g., build caches). This setup is representative of small to medium-sized codebases, which are common in microservices architectures and generally targeted by Spring Boot native applications.
+The goal is to evaluate the performance of the tools using their vanilla configurations, without peripheral tooling 
+optimizations (build caches, ).
+
+This setup is designed to reflect, at reasonable effort, typical conditions for small to medium-sized codebases,
+which are common in microservices architectures and generally targeted by Spring Boot cloud-native applications.
 
 ## Application Test
 The benchmarks are based on an example from the [Baeldung Spring Boot Native tutorial](https://www.baeldung.com/spring-native-intro), which resolves over 50 JARs in the classpath.
@@ -259,7 +262,8 @@ JeKa excels in configuration simplicity. Not only is the configuration much more
 
 ## Conclusion:
 
-All three tools are suitable for creating Spring Boot Docker images. Choosing a build tool depends on personal preference: some developers stick with traditional, well-established tools, while others opt for simplicity, performance, or innovation.
+All three tools are suitable for creating Spring Boot Docker images. 
+Choosing a build tool depends on personal preference: some developers stick with traditional, well-established tools, while others opt for simplicity, performance, or innovation.
 
 ## Resources:
 - Customize Docker Images with JeKa: https://jeka-dev.github.io/jeka/reference/kbeans-docker/)

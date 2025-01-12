@@ -11,9 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class JacksonAutoConfigurationIntegrationTest {
 
-    public int age;
-
-
     @Autowired
     ObjectMapper mapper;
 
