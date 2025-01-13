@@ -25,7 +25,7 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
-          key: ${{ runner.os }}-bench-1
+          key: ${{ runner.os }}-global-caches
 
       - name: Prefetch dependencies
         run: |
@@ -68,4 +68,4 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
-          key: ${{ runner.os }}-bench-1
+          key: ${{ runner.os }}-lobal-caches
