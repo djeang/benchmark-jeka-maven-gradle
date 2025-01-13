@@ -1,4 +1,4 @@
-name: GraalVM build
+name: zero-cache
 on:
   workflow_dispatch:
 jobs:
