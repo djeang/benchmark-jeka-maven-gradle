@@ -1,4 +1,4 @@
-name: with-caches
+name: global-caches
 on:
   workflow_dispatch:
 jobs:

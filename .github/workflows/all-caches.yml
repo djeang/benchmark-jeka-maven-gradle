@@ -1,4 +1,4 @@
-name: with-caches
+name: all-caches
 on: [push, pull_request]
 jobs:
   build:
