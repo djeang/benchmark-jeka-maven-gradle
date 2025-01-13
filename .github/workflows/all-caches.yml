@@ -1,6 +1,5 @@
 name: with-caches
-on:
-  workflow_dispatch:
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +24,8 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
+            ./jeka-work
+            ./gradle
           key: ${{ runner.os }}-bench-1
 
       - name: Prefetch dependencies
