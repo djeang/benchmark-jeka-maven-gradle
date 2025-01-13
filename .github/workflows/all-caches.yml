@@ -69,4 +69,6 @@ jobs:
             ~/.m2
             ~/.jeka/cache
             ~/.gradle/cache
+            ./jeka-work
+            ./gradle
           key: ${{ runner.os }}-bench-1
