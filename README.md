@@ -1,31 +1,28 @@
 # Cloud-Native Spring Boot Build Benchmark: Maven vs JeKa vs Gradle
 
 ## Objective
+Compare the build performance of *Maven*, *JeKa*, and *Gradle* for Spring Boot applications. This includes creating JVM and native Docker images in cloud-native scenarios.
 
-Compare the performance of *Maven*, *JeKa*, and *Gradle* in building a Spring Boot cloud-native application, including creating both JVM and native Docker images.
+Two scenarios are tested:
+- **Development on workstations**: With a high-performance MacBook and a medium-performance Windows machine (all caches enabled).
+- **Simulated CI/CD pipeline**: With all caches disabled (no Docker cache, wrapper cache, or Java dependencies cache).
 
-This comparison is performed in the following scenarios:
-- **Development on workstations**: Tested on a high-performance MacBook and a medium-performance Windows machine (with all caches available).
-- **CI/CD pipeline simulation**: All caches disabled (no Docker cache, no wrapper tool cache, no Java dependencies cache).
-
-The goal is to evaluate the performance of the tools using their vanilla configurations, without peripheral tooling 
-optimizations (build caches, ).
-
-This setup is designed to reflect, at reasonable effort, typical conditions for small to medium-sized codebases,
-which are common in microservices architectures and generally targeted by Spring Boot cloud-native applications.
+The goal is to measure performance using default (vanilla) configurations, without optimizations like build caches. This reflects typical conditions for small to medium-sized codebases common in microservices architectures.
 
 ## Application Test
-The benchmarks are based on an example from the [Baeldung Spring Boot Native tutorial](https://www.baeldung.com/spring-native-intro), which resolves over 50 JARs in the classpath.
+The benchmark is based on an example from the [Baeldung Spring Boot Native tutorial](https://www.baeldung.com/spring-native-intro), using a project with over 50 JARs in the classpath.
 
-The small codebase is used intentionally since Java compilation is relatively fast, as discussed [here](https://mill-build.org/blog/1-java-compile.html).
+A small codebase is intentional, as Java compilation is fast, as explained [here](https://mill-build.org/blog/1-java-compile.html).
 
 ## Setup
-The project is configured to be built with the three mentioned build tools.
+The project is configured to work with all three tools: Maven, JeKa, and Gradle.
+
+For simplicity, we test everything on GraalVM. It includes tools for compiling to native apps, avoiding extra setup. 
+These tools are not needed to compile native with *Jeka* or to create native Docker images.
 
 ### Versions Used
 ```
-Java:       21-temurin
-GraalVM:    23
+Java:       21-GraalVM
 Maven:      3.9.9
 Jeka:       0.11.12
 Gradle:     8.12
@@ -33,30 +30,31 @@ SpringBoot: 3.4.1
 ```
 
 ### Methodology
-The project is configured to build using *Maven*, *Jeka*, and *Gradle*.
-- The listed actions are executed with each build tool. Execution times are provided in the tables below.
-- Each action for each build tool is performed twice to eliminate the impact of tool or image fetching. Only the second (final) result is recorded.
-- Local scripts such as `./mvnw`, `./jeka`, and `./gradle` are used to execute build tool commands.
-- Elapsed times are measured with the `time` utility on *macOS* and `Measure-Command { .\my command | Out-Default }` on *Windows PowerShell*.
-- All commands are executed from the IntelliJ terminal.
+This project is configured to build using *Maven*, *Jeka*, and *Gradle*.
 
-#### Development Time Scenario
-- Measurements are taken using high-performance *macOS* hardware.
-- Measurements are also taken on medium-tier *Windows* hardware.
-- Each command is executed at least twice to ensure proper caching, with only the best results being considered.
+- The listed actions are performed with each build tool, and their execution times are recorded in the tables below.
+- Every action is executed twice for each build tool to negate the impact of tool or dependency fetching. Only the second (final) result is recorded.
+- Build tool commands are executed using their respective local scripts: `./mvnw`, `./jeka`, and `./gradlew`.
+- Execution times are measured using the `time` utility on *macOS* and `Measure-Command { .\my-command | Out-Default }` on *Windows PowerShell*.
+- All commands are executed from the IntelliJ IDEA terminal.
 
-#### Pipeline in a Clean Environment
-This involves a "naked" setup with only Java installed:
-- No build tools pre-installed (Maven, Gradle, and Jeka wrappers are used).
-- No dependencies fetched (new repository setup).
-- No Docker caches.
-  Between each execution, the `clean-caches.sh` script is run to ensure a clean environment.
+#### Local Development Workflow
+- Measurements are collected using high-performance *macOS* hardware.
+- Additional measurements are taken on mid-range *Windows* hardware.
+- Each command is executed at least twice to confirm proper caching, with only the best result recorded.
+
+#### Pipeline Workflow
+This scenario, we use setup a *Github Action*
+
+- No pre-installed build tools (the Maven, Gradle, and Jeka wrappers are used).
+- No pre-fetched dependencies (a new repository is created).
+- No existing Docker caches.
+- Before each execution, the `clean-caches.sh` script is run to ensure a clean environment.
 
 ### Build Process
-For Maven, we use the `native-maven-plugin` and `spring-boot-maven-plugin` plugins.  
-For Gradle, we use the `native-gradle-plugin` and `org.springframework.boot` plugins.  
-For Jeka, we use only the `springboot-plugin`, as native support is directly integrated into Jeka.
-
+- For Maven, the `native-maven-plugin` and `spring-boot-maven-plugin` are used.
+- For Gradle, the `native-gradle-plugin` and `org.springframework.boot` plugins are used.
+- For Jeka, only the `springboot-plugin` is used, as Jeka includes built-in support for native builds.
 ### Command Lines
 The following commands are executed for each build tool:
 
