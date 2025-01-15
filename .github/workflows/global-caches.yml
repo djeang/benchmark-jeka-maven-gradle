@@ -40,12 +40,13 @@ jobs:
       - name: Gradle build jar
         run: ./gradlew clean build -PdisableNative
 
+      - name: Gradle JVM Docker
+        run: ./gradlew clean bootBuildImage -PdisableNative
       - name: Maven JVM Docker
         run: ./mvnw clean spring-boot:build-image
       - name: Jeka JVM Docker
         run: "./jeka test docker: build --clean --duration"
-      - name: Gradle JVM Docker
-        run: ./gradlew clean bootBuildImage -PdisableNative
+
 
       - name: Maven native Docker
         run: ./mvnw clean -Pnative spring-boot:build-image

@@ -44,17 +44,14 @@ This project is configured to build using *Maven*, *Jeka*, and *Gradle*.
 - Each command is executed at least twice to confirm proper caching, with only the best result recorded.
 
 #### Pipeline Workflow
-This scenario, we use setup a *Github Action*
-
-- No pre-installed build tools (the Maven, Gradle, and Jeka wrappers are used).
-- No pre-fetched dependencies (a new repository is created).
-- No existing Docker caches.
-- Before each execution, the `clean-caches.sh` script is run to ensure a clean environment.
+In this scenario, we use setup a [*Github Action pipeline*](https://github.com/djeang/benchmark-jeka-maven-gradle/blob/master/.github/workflows/global-caches.yml) 
+that do a minimal caching (dependencies and wrappers).
 
 ### Build Process
 - For Maven, the `native-maven-plugin` and `spring-boot-maven-plugin` are used.
 - For Gradle, the `native-gradle-plugin` and `org.springframework.boot` plugins are used.
 - For Jeka, only the `springboot-plugin` is used, as Jeka includes built-in support for native builds.
+
 ### Command Lines
 The following commands are executed for each build tool:
 
@@ -116,24 +113,18 @@ Native executables are created using *GraalVM native-image* tools, which seem le
 
 ---
 
-### Measurements with Zero Cache
-**Specs:** Apple M4 Pro, 48 GB RAM
+### Measurements on Github Pipeline
 
-|                                             | Maven  | Jeka   | Gradle | Gradle (no daemon) |
-|---------------------------------------------|--------|--------|--------|--------------------|
-| Clean                                       | 7.86s  | 1.32s  | 25.68s | 22.74s             |
-| Compile                                     | 19.40s | 24.58s | 33.82s | 34.18s             |
-| Create Jar from scratch (including tests)   | 27.15s | 38.87s | fail   | 42.59s             |
-| Create native executable from compiled jars | 1m 38s | 1m 31s | fail   | 1m 53s             |
-| Create Docker JVM-based image from scratch  | 1m 27s | 31.40s | fail   | 2m 4s              |
-| Create Docker native image from scratch     | 2m 26s | 2m 28s | fail   | 2m 40s             |
+|                                             | Maven  | Jeka   | Gradle | 
+|---------------------------------------------|--------|--------|--------|
+| Create Jar from scratch (including tests)   | 7s     | 7s     | 8s     | 
+| Create native executable from compiled jars | 5m 47s | 5m 30s | 5m 29s | 
+| Create Docker JVM-based image from scratch  | 30s    | 8s     | 16s    | 
+| Create Docker native image from scratch     | 3m 54s | 3m 41s | 3m 35s | 
 
 **Observations:**
-- Gradle struggles with wrapper installation time.
-- Complex actions fail on Gradle without a cache (possibly due to missing prerequisites).
-- Jeka starts quickly but loses time when dependencies are not pre-cached.
-- For longer operations, Gradle’s slow startup has less impact.
-- Jeka remains superior for creating JVM-based images in fresh environments.
+- Creating a native image takes at least, 3 minutes more than a normal JVM-image
+- All tools performs almost the same, except for creating JVM Docker images, where Jeka is significantly faster than gradle
 
 **Analysis:**  
 Smaller build tools like Jeka start faster. However, Jeka’s dependency management relies on *Ivy*, which is slower when repos are empty. In environments without a Docker build cache, Jeka has an advantage as it downloads fewer images.
