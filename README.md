@@ -193,9 +193,9 @@ Jeka jeka.properties
 ```properties
 jeka.java.version=21
 
-jeka.default.kbean=project
-jeka.inject.classpath=dev.jeka:springboot-plugin
-@springboot=
+jeka.kbean.default=project
+jeka.classpath=dev.jeka:springboot-plugin
+@springboot=on
 ```
 
 Gradle build.gradle
