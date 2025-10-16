@@ -145,7 +145,9 @@ The table lists the produced image sizes. Jeka optimizes Docker layering for JVM
 
 ## ⚙️ Configuration
 
-The following compares the configuration required to perform the same tasks for each tool. Note the conciseness of Jeka.
+The following compares the configuration required to perform the same tasks for each tool. 
+
+Note the conciseness of Jeka.
 
 ### Maven `pom.xml`
 ```xml
