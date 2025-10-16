@@ -191,6 +191,7 @@ The following compares the configuration required to perform the same tasks for 
 
 ### Jeka `jeka.properties`
 ```properties
+jeka.version=0.11.15
 jeka.java.version=21
 
 jeka.kbean.default=project
