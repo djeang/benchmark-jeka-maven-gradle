@@ -75,7 +75,7 @@ The commands executed for each tool:
 | Compile                                   | 1.43s    | 0.49s   | 0.87s   | 6.69s              |
 | Create JAR from scratch (incl. tests)     | 2.97s    | 1.93s   | 2.29s   | 8.99s              |
 | Create native executable from compiled JARs | 1m 12s  | 1m 10s  | 1m 11s  | 1m 17s             |
-| Create Docker JVM-based image from scratch| 9.71s    | 2.23s   | 7.04s   | 13.60s             |
+| Create Docker JVM-based image from scratch| 9.71s    | 2.23s  ⚡| 7.04s   | 13.60s             |
 | Create Docker native image from scratch   | 59.81s   | 59.31s  | 58.89s  | 1m 6s              |
 
 **Observations:**
@@ -117,7 +117,7 @@ GraalVM's native-image tools are less optimized on Windows, which increases time
 |-------------------------------------------|--------|-------|--------|
 | Create JAR from scratch (incl. tests)     | 7s     | 7s    | 8s     |
 | Create native executable from compiled JARs | 5m 47s| 5m 30s| 5m 29s |
-| Create Docker JVM-based image from scratch| 30s    | 8s    | 16s    |
+| Create Docker JVM-based image from scratch| 30s    | 8s  ⚡ | 16s    |
 | Create Docker native image from scratch   | 3m 54s | 3m 41s| 3m 35s |
 
 **Observations:**
