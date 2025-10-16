@@ -240,12 +240,13 @@ repositories {
 }
 ```
 
-For Maven and Gradle, GraalVM must be installed manually. Jeka handles this automatically. To ensure consistency, configure the host with a shared GraalVM:
+> For Maven and Gradle, GraalVM must be installed manually. Jeka handles this automatically. To ensure consistency, configure the host with a shared GraalVM:
 
-```
-export GRAALVM_HOME=~/.jeka/cache/jdks/graalvm-23
-export PATH=$PATH:$GRAALVM_HOME/bin
-```
+>```
+>export GRAALVM_HOME=~/.jeka/cache/jdks/graalvm-23
+>export PATH=$PATH:$GRAALVM_HOME/bin
+>```
+</small>
 
 ## 📚 Resources
 - Customize Docker Images with Jeka: [Jeka Documentation](https://jeka-dev.github.io/jeka/reference/kbeans-docker/)
